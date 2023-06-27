@@ -6,34 +6,87 @@ import { authOptions } from './api/auth/[...nextauth]';
 import { getServerSession } from 'next-auth';
 import Head from 'next/head';
 import Layout from '@/components/Layout';
+import ContactCard from '@/components/ContactCard';
 
 const inter = Inter({ subsets: ['latin'] });
 const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'] });
 
-// export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
-//   const session = await getServerSession(context.req, context.res, authOptions);
+export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+  // const session = await getServerSession(context.req, context.res, authOptions);
 
-//   if (!session) {
-//     return {
-//       redirect: {
-//         permanent: false,
-//         destination: 'http://localhost:3000/login',
-//       },
-//     };
-//   }
+  // if (!session) {
+  //   return {
+  //     redirect: {
+  //       permanent: false,
+  //       destination: 'http://localhost:3000/login',
+  //     },
+  //   };
+  // }
 
-//   return {
-//     props: {
-//       some: 'hoyeah',
-//     },
-//   };
-// };
+  return {
+    props: {
+      data: [
+        {
+          id: 1,
+          firstName: 'Aldiansyah',
+          lastName: 'Putra',
+          twitter: 'aldiansyhdp',
+          bio: 'A regular guy with a curious mind',
+          imgUrl:
+            'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cG90cmFpdHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60',
+        },
 
-export default function Home() {
+        {
+          id: 2,
+          firstName: 'Giga',
+          lastName: 'Chad',
+          twitter: 'gigachad',
+          bio: 'A supa giga chad on steroid',
+          imgUrl:
+            'https://images.unsplash.com/photo-1610276198568-eb6d0ff53e48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cG90cmFpdHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60',
+        },
+        {
+          id: 3,
+          firstName: 'Jennifer',
+          lastName: 'Lawrence',
+          twitter: 'jennicute',
+          bio: 'Beautiful talented actress',
+          imgUrl:
+            'https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cG90cmFpdHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60',
+        },
+
+        {
+          id: 4,
+          firstName: 'Jeremy',
+          lastName: 'Renner',
+          twitter: 'renner',
+          bio: 'A regular guy with a curious mind',
+          imgUrl:
+            'https://images.unsplash.com/photo-1566753323558-f4e0952af115?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHBvdHJhaXR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60',
+        },
+      ],
+    },
+  };
+};
+
+export type Contact = {
+  id: number;
+  firstName: string;
+  lastName: string;
+  twitter: string;
+  bio: string;
+  imgUrl: string;
+};
+
+type HomeProps = {
+  data: Contact[];
+};
+
+export default function Home({ data }: HomeProps) {
   const session = useSession();
 
   useEffect(() => {
-    console.log(session);
+    console.log(data);
   });
 
   return (
@@ -57,6 +110,11 @@ export default function Home() {
                 </div>
                 <h1 className={`${jakarta.className} text-4xl font-bold`}>Your Contact List</h1>
               </div>
+              <ul className='mt-8 space-y-4'>
+                {data.map(contact => {
+                  return <ContactCard key={contact.id} data={contact} />;
+                })}
+              </ul>
             </div>
           </div>
         </section>

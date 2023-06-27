@@ -25,7 +25,7 @@ function Navbar() {
               <path d='M249 200.092C236.674 179.356 217.359 163.693 194.523 155.916C171.688 148.139 146.828 148.756 124.408 157.658L139.415 195.457C152.844 190.126 166.923 187.107 177.432 189.034C187.942 190.96 194.493 193.811 199.27 210.598L249 200.092Z' />
             </svg>
           </Link>
-          <div className='w-[1.5px] h-12 bg-gray-800/90'></div>
+          <div className='border-r h-12 border-r-gray-800/75'></div>
           {router.pathname === '/' && <SearchBar />}
         </div>
         {router.pathname !== '/login' && (
