@@ -41,7 +41,7 @@ export default function Home() {
         <title>Home | Qontax</title>
       </Head>
       <Layout>
-        <section className={`flex justify-center items-center ${inter.className} `}>
+        <section className={`flex justify-center items-center ${inter.className} py-14`}>
           <div className='text-center'>
             <h1>Home</h1>
           </div>
