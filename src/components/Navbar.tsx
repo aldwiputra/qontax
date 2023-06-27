@@ -26,9 +26,9 @@ function Navbar() {
             />
           </svg>
         </Link>
-        {router.asPath !== '/login' && (
+        {router.pathname !== '/login' && (
           <>
-            {router.asPath === '/' && <SearchBar />}
+            {router.pathname === '/' && <SearchBar />}
             <AuthButton status={session.status} />
           </>
         )}

@@ -41,7 +41,7 @@ function AuthButton({ status }: AuthButtonProps) {
             setLoading(true);
             signOut({ callbackUrl: '/login' });
           }}
-          className='py-2.5 px-4 text-sm font-medium rounded-lg focus:z-10 focus:ring-2 focus:outline-none focus:ring-blue-600 bg-blue-700 border border-blue-500 text-white hover:bg-blue-800 inline-flex items-center'>
+          className='py-2.5 px-4 text-sm font-medium rounded-lg focus:z-10 focus:ring-2 focus:outline-none focus:ring-blue-600 bg-blue-700 border border-blue-500 text-blue-200 hover:bg-blue-800 inline-flex items-center'>
           {loading ? (
             <svg
               aria-hidden='true'
