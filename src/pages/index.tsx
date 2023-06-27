@@ -1,4 +1,4 @@
-import { Inter } from 'next/font/google';
+import { Archivo, Inter, Lexend, Plus_Jakarta_Sans } from 'next/font/google';
 import { signOut, useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
@@ -8,6 +8,7 @@ import Head from 'next/head';
 import Layout from '@/components/Layout';
 
 const inter = Inter({ subsets: ['latin'] });
+const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'] });
 
 // export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
 //   const session = await getServerSession(context.req, context.res, authOptions);
@@ -41,9 +42,22 @@ export default function Home() {
         <title>Home | Qontax</title>
       </Head>
       <Layout>
-        <section className={`flex justify-center items-center ${inter.className} py-14`}>
-          <div className='text-center'>
-            <h1>Home</h1>
+        <section className={`${inter.className} py-8`}>
+          <div className='relative max-w-screen-xl mx-auto px-8 py-6 '>
+            <div className='max-w-4xl mx-auto'>
+              <div className=' text-gray-400 flex gap-3 items-center'>
+                <div className='w-10 h-10 p-2.5 rounded-lg border border-gray-300/10  bg-gray-800'>
+                  <svg
+                    aria-hidden='true'
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='currentColor'
+                    viewBox='0 0 20 18'>
+                    <path d='M9 1.334C7.06.594 1.646-.84.293.653a1.158 1.158 0 0 0-.293.77v13.973c0 .193.046.383.134.55.088.167.214.306.366.403a.932.932 0 0 0 .5.147c.176 0 .348-.05.5-.147 1.059-.32 6.265.851 7.5 1.65V1.334ZM19.707.653C18.353-.84 12.94.593 11 1.333V18c1.234-.799 6.436-1.968 7.5-1.65a.931.931 0 0 0 .5.147.931.931 0 0 0 .5-.148c.152-.096.279-.235.366-.403.088-.167.134-.357.134-.55V1.423a1.158 1.158 0 0 0-.293-.77Z' />
+                  </svg>
+                </div>
+                <h1 className={`${jakarta.className} text-4xl font-bold`}>Your Contact List</h1>
+              </div>
+            </div>
           </div>
         </section>
       </Layout>
