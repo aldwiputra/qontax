@@ -7,6 +7,7 @@ import { getServerSession } from 'next-auth';
 import Head from 'next/head';
 import Layout from '@/components/Layout';
 import ContactCard from '@/components/ContactCard';
+import Link from 'next/link';
 
 const inter = Inter({ subsets: ['latin'] });
 const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'] });
@@ -30,16 +31,17 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
           id: 1,
           firstName: 'Aldiansyah',
           lastName: 'Putra',
+          occupation: 'Entrepreneur',
           twitter: 'aldiansyhdp',
           bio: 'A regular guy with a curious mind',
           imgUrl:
             'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cG90cmFpdHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60',
         },
-
         {
           id: 2,
           firstName: 'Giga',
           lastName: 'Chad',
+          occupation: 'Content Creator',
           twitter: 'gigachad',
           bio: 'A supa giga chad on steroid',
           imgUrl:
@@ -49,6 +51,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
           id: 3,
           firstName: 'Jennifer',
           lastName: 'Lawrence',
+          occupation: 'Actress',
           twitter: 'jennicute',
           bio: 'Beautiful talented actress',
           imgUrl:
@@ -59,6 +62,7 @@ export const getServerSideProps: GetServerSideProps = async (context: GetServerS
           id: 4,
           firstName: 'Jeremy',
           lastName: 'Renner',
+          occupation: 'Web Developer',
           twitter: 'renner',
           bio: 'A regular guy with a curious mind',
           imgUrl:
@@ -73,6 +77,7 @@ export type Contact = {
   id: number;
   firstName: string;
   lastName: string;
+  occupation: string;
   twitter: string;
   bio: string;
   imgUrl: string;
@@ -110,10 +115,34 @@ export default function Home({ data }: HomeProps) {
                 </div>
                 <h1 className={`${jakarta.className} text-4xl font-bold`}>Your Contact List</h1>
               </div>
-              <ul className='mt-8 space-y-4'>
+              <ul className='mt-8 grid auto-fit gap-4 '>
                 {data.map(contact => {
                   return <ContactCard key={contact.id} data={contact} />;
                 })}
+                <Link
+                  href='/contacts/new'
+                  className='rounded-lg flex items-center justify-center border-2 border-dashed border-gray-400 text-gray-400 hover:bg-gray-400/10'>
+                  <div className='flex flex-col gap-2 items-center'>
+                    <div className=' border border-gray-400 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center'>
+                      <svg
+                        className='w-4 h-4 text-gray-800 dark:text-white'
+                        aria-hidden='true'
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 18 18'>
+                        <path
+                          stroke='currentColor'
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth='1'
+                          d='M9 1v16M1 9h16'
+                        />
+                      </svg>
+                      <span className='sr-only'>Icon description</span>
+                    </div>
+                    <span className='font-medium'>Create new contact</span>
+                  </div>
+                </Link>
               </ul>
             </div>
           </div>

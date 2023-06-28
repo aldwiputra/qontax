@@ -37,6 +37,7 @@ function AuthButton({ status }: AuthButtonProps) {
     return (
       <div className='flex '>
         <button
+          disabled={loading}
           onClick={() => {
             setLoading(true);
             signOut({ callbackUrl: '/login' });

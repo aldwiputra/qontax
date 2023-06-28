@@ -27,7 +27,7 @@ function SearchBar() {
           placeholder='Search'
           required
         />
-        <div className='invisible peer-focus:visible transition-all flex items-center gap-1  text-white absolute right-2 top-1/2 -translate-y-1/2  focus:ring-4 focus:outline-none font-medium rounded-md text-xs px-4 py-1.5 bg-slate-500'>
+        <div className='invisible peer-focus:visible flex items-center gap-1  text-white absolute right-2 top-1/2 -translate-y-1/2  focus:ring-4 focus:outline-none font-medium rounded-md text-xs px-4 py-1.5 bg-slate-500'>
           <svg
             className='w-5 -ml-1 fill-white translate-y-[5%]'
             xmlns='http://www.w3.org/2000/svg'
