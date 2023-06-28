@@ -1,6 +1,6 @@
 function SearchBar() {
   return (
-    <form autoComplete='off'>
+    <form autoComplete='off' className='hidden sm:block'>
       <label htmlFor='default-search' className='mb-2 text-sm font-medium sr-only text-white'>
         Search
       </label>
@@ -23,7 +23,7 @@ function SearchBar() {
         <input
           type='search'
           id='default-search'
-          className='peer block w-full py-3 px-3 pl-10 text-sm lg:min-w-[20rem] border rounded-lg  outline-none bg-gray-800 border-gray-700 placeholder-gray-400 text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
+          className='peer  w-full py-3 px-3 pl-10 text-sm lg:min-w-[20rem] border rounded-lg  outline-none bg-gray-800 border-gray-700 placeholder-gray-400 text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
           placeholder='Search'
           required
         />
