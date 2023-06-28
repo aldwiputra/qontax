@@ -14,7 +14,7 @@ function AuthButton({ status }: AuthButtonProps) {
       <div className='flex'>
         <Link
           href='/login'
-          className='py-2.5 px-4 text-sm font-medium rounded-lg focus:z-10 focus:ring-2 focus:outline-none focus:ring-blue-600 bg-blue-700 border border-blue-500 text-white hover:bg-blue-800 inline-flex items-center'>
+          className='py-2.5 px-4 text-sm font-medium rounded-lg border   focus:z-10 focus:ring-2 focus:outline-none inline-flex items-center focus:ring-gray-700 bg-gray-800 text-gray-400 border-gray-600 hover:text-white hover:bg-gray-700'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -42,7 +42,7 @@ function AuthButton({ status }: AuthButtonProps) {
             setLoading(true);
             signOut({ callbackUrl: '/login' });
           }}
-          className='py-2.5 px-4 text-sm font-medium rounded-lg focus:z-10 focus:ring-2 focus:outline-none focus:ring-blue-600 bg-blue-700 border border-blue-500 text-blue-200 hover:bg-blue-800 inline-flex items-center'>
+          className='py-2.5 px-4 text-sm font-medium rounded-lg border   focus:z-10 focus:ring-2 focus:outline-none inline-flex items-center focus:ring-gray-700 bg-gray-800 text-gray-400 border-gray-600 hover:text-white hover:bg-gray-700'>
           {loading ? (
             <svg
               aria-hidden='true'
