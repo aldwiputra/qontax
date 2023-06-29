@@ -69,6 +69,7 @@ function FormContact({
             className=' border  text-sm rounded-lg  focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 bg-gray-800/50 border-gray-700/50 placeholder-gray-500 text-white '
             placeholder='https://images.unsplash.com/profile'
             {...register('imgUrl', {
+              required: true,
               pattern: {
                 value:
                   /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,

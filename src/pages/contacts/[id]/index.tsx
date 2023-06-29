@@ -73,9 +73,9 @@ function EditContact({ data }: ContactProps) {
                 </div>
                 <h1 className={`${jakarta.className} text-2xl sm:text-4xl font-bold`}>Contact</h1>
               </div>
-              <div className='flex gap-8 items-start border border-gray-800 p-8 rounded-lg'>
-                <div className='flex flex-col gap-6'>
-                  <div className='relative aspect-square max-w-[6rem] bg-gray-600/10 rounded-full'>
+              <div className='flex gap-8 items-start border border-gray-800 py-8 px-12 rounded-lg  flex-wrap'>
+                <div className='flex flex-col gap-6 mx-auto sm:mx-0'>
+                  <div className='relative aspect-square w-[6rem] bg-gray-600/10 rounded-full'>
                     {
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
@@ -93,13 +93,17 @@ function EditContact({ data }: ContactProps) {
                         href={`/contacts/${data.id}/edit`}
                         className='focus:ring-2 focus:outline-none font-medium rounded-md text-xs p-2 text-center inline-flex justify-center items-center text-emerald-600/75 bg-emerald-600/20 hover:bg-emerald-600/30 focus:ring-emerald-800'>
                         <svg
-                          className='w-5 h-5'
-                          aria-hidden='true'
                           xmlns='http://www.w3.org/2000/svg'
-                          fill='currentColor'
-                          viewBox='0 0 20 18'>
-                          <path d='M12.687 14.408a3.01 3.01 0 0 1-1.533.821l-3.566.713a3 3 0 0 1-3.53-3.53l.713-3.566a3.01 3.01 0 0 1 .821-1.533L10.905 2H2.167A2.169 2.169 0 0 0 0 4.167v11.666A2.169 2.169 0 0 0 2.167 18h11.666A2.169 2.169 0 0 0 16 15.833V11.1l-3.313 3.308Zm5.53-9.065.546-.546a2.518 2.518 0 0 0 0-3.56 2.576 2.576 0 0 0-3.559 0l-.547.547 3.56 3.56Z' />
-                          <path d='M13.243 3.2 7.359 9.081a.5.5 0 0 0-.136.256L6.51 12.9a.5.5 0 0 0 .59.59l3.566-.713a.5.5 0 0 0 .255-.136L16.8 6.757 13.243 3.2Z' />
+                          fill='none'
+                          viewBox='0 0 24 24'
+                          strokeWidth={2}
+                          stroke='currentColor'
+                          className='w-5 h-5'>
+                          <path
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
+                            d='M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125'
+                          />
                         </svg>
                       </Link>
                       <button
