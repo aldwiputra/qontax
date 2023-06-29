@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps = async (
     return {
       redirect: {
         permanent: false,
-        destination: 'http://localhost:3000/login',
+        destination: '/login',
       },
     };
   }
@@ -54,7 +54,7 @@ function NewContact() {
   const onSubmit: SubmitHandler<IFormInput> = async (formData) => {
     try {
       await axios.post(
-        '/api/contact',
+        '/api/contacts',
         {
           ...formData,
           userId: session.data?.user.id,

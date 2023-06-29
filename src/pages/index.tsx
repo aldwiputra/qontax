@@ -40,10 +40,6 @@ type HomeProps = {
 export default function Home({ data }: HomeProps) {
   const session = useSession();
 
-  useEffect(() => {
-    console.log(data);
-  });
-
   return (
     <>
       <Head>
