@@ -63,14 +63,14 @@ export default function Home({ data }: HomeProps) {
                 </div>
                 <Link
                   href='/contacts/new'
-                  className='focus:outline-none leading-none text-green-700 hover:bg-green-700/20 focus:ring-2 focus:ring-green-700 font-medium rounded-lg text-sm px-4 py-2.5 '>
+                  className='inline-flex items-center focus:outline-none leading-none text-green-700 bg-green-700/10 hover:bg-green-700/20 focus:ring-2 focus:ring-green-700 font-medium rounded-lg text-sm px-4 py-2'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     fill='none'
                     viewBox='0 0 24 24'
                     strokeWidth={1.5}
                     stroke='currentColor'
-                    className='inline mr-2 -mt-[3px] w-6 h-6'>
+                    className='inline mr-2 w-6 h-6'>
                     <path
                       strokeLinecap='round'
                       strokeLinejoin='round'
