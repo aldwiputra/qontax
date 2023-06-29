@@ -73,8 +73,8 @@ function EditContact({ data }: ContactProps) {
                 </div>
                 <h1 className={`${jakarta.className} text-2xl sm:text-4xl font-bold`}>Contact</h1>
               </div>
-              <div className='grid sm:grid-flow-col gap-8 items-start border border-gray-800 py-8 px-6 sm:px-12 rounded-lg  flex-wrap'>
-                <div className='flex flex-col gap-6 mx-auto md:mx-0'>
+              <div className='grid grid-cols-2-auto gap-8 items-start border border-gray-800 py-8 px-6 sm:px-12 rounded-lg  flex-wrap'>
+                <div className='flex flex-col gap-6 mx-auto w-fit'>
                   <div className='relative aspect-square w-[6rem] bg-gray-600/10 rounded-full'>
                     {
                       // eslint-disable-next-line @next/next/no-img-element
