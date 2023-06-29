@@ -1,9 +1,7 @@
-import { Archivo, Inter, Lexend, Plus_Jakarta_Sans } from 'next/font/google';
-import { signOut, useSession } from 'next-auth/react';
+import { Inter, Plus_Jakarta_Sans } from 'next/font/google';
+import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
-import { authOptions } from './api/auth/[...nextauth]';
-import { getServerSession } from 'next-auth';
 import Head from 'next/head';
 import Layout from '@/components/Layout';
 import ContactCard from '@/components/ContactCard';
