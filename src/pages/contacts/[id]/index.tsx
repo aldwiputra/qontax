@@ -10,6 +10,7 @@ import Link from 'next/link';
 import axios from 'axios';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 const inter = Inter({ subsets: ['latin'] });
 const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'] });
@@ -75,11 +76,11 @@ function EditContact({ data }: ContactProps) {
               </div>
               <div className='flex gap-8 items-start border border-gray-800 p-8 rounded-lg'>
                 <div className='flex flex-col gap-6'>
-                  <div className='relative aspect-square max-w-[6rem]'>
+                  <div className='relative aspect-square max-w-[6rem] bg-gray-600/10 rounded-full'>
                     {
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
-                        className='relative z-10 rounded-full outline outline-2 outline-offset-4 outline-blue-700 w-full object-cover object-center h-full'
+                        className='relative z-10 text-transparent rounded-full outline outline-2 outline-offset-4 outline-blue-700 w-full object-cover object-center h-full'
                         src={data.imgUrl}
                         alt={`Photo of ${data.firstName}`}
                         onError={(e) => (e.currentTarget.src = '/avatar.svg')}

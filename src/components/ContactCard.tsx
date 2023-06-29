@@ -14,11 +14,11 @@ function ContactCard({ data }: ContactProps) {
         href={`/contacts/${data.id}`}
         className='block w-full text-center rounded-lg px-8 py-6 border border-gray-700 shadow bg-gray-800 hover:bg-gray-750 shadow-custom hover:border-gray-500'>
         <div className='space-y-4'>
-          <div className='mx-auto relative aspect-square max-w-[4rem]'>
+          <div className='mx-auto relative aspect-square max-w-[4rem] bg-gray-600/10 rounded-full'>
             {
               // eslint-disable-next-line @next/next/no-img-element
               <img
-                className='relative z-10 rounded-full w-full object-cover object-center h-full'
+                className='relative z-10 rounded-full w-full object-cover object-center h-full text-transparent'
                 src={data.imgUrl}
                 alt={`Photo of ${data.firstName}`}
                 onError={(e) => (e.currentTarget.src = '/avatar.svg')}
