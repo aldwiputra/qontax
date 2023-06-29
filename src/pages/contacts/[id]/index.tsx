@@ -41,11 +41,10 @@ function EditContact({ data }: ContactProps) {
   const router = useRouter();
 
   async function deleteContact() {
-    setLoadingSubmit(false);
+    setLoadingSubmit(true);
     try {
-      await axios.put(`/api/contacts/${data.id}`);
+      await axios.delete(`/api/contacts/${data.id}`);
 
-      setLoadingSubmit(false);
       router.push('/');
     } catch (err) {
       setLoadingSubmit(false);
