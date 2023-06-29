@@ -2,14 +2,19 @@ import Layout from '@/components/Layout';
 import { useSession } from 'next-auth/react';
 import { Inter, Plus_Jakarta_Sans } from 'next/font/google';
 import Head from 'next/head';
-import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import axios from 'axios';
+import { useRouter } from 'next/router';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
+import { prisma } from '@/libs/db';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../api/auth/[...nextauth]';
+import FormContact from '@/components/FormContact';
 
 const inter = Inter({ subsets: ['latin'] });
 const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'] });
 
-interface IFormInput {
+export interface IFormInput {
   firstName: string;
   lastName: string;
   occupation: string;
@@ -18,20 +23,38 @@ interface IFormInput {
   imgUrl: string;
 }
 
+export const getServerSideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const session = await getServerSession(context.req, context.res, authOptions);
+
+  if (!session) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: 'http://localhost:3000/login',
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
+
 function NewContact() {
-  const [submitLoading, setSubmitLoading] = useState(false);
+  const router = useRouter();
   const session = useSession();
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<IFormInput>();
 
-  const onSubmit: SubmitHandler<IFormInput> = async formData => {
+  const onSubmit: SubmitHandler<IFormInput> = async (formData) => {
     try {
-      setSubmitLoading(true);
       await axios.post(
-        'http://localhost:3001/api/contact',
+        '/api/contact',
         {
           ...formData,
           userId: session.data?.user.id,
@@ -42,10 +65,9 @@ function NewContact() {
           },
         }
       );
-      setSubmitLoading(false);
+      router.push('/');
     } catch (error: any) {
       console.log(error);
-      setSubmitLoading(false);
     }
   };
 
@@ -68,14 +90,18 @@ function NewContact() {
                     />
                   </svg>
                 </div>
-                <h1 className={`${jakarta.className} text-2xl sm:text-4xl font-bold`}>Create Contact</h1>
+                <h1 className={`${jakarta.className} text-2xl sm:text-4xl font-bold`}>
+                  Create Contact
+                </h1>
               </div>
 
-              <form autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
+              {/* <form autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
                 <div className='grid gap-4 sm:grid-cols-2 sm:gap-6'>
                   <div className='w-full'>
                     <div className='flex items-center justify-between mb-2'>
-                      <label htmlFor='firstName' className='block  text-sm font-medium text-gray-300'>
+                      <label
+                        htmlFor='firstName'
+                        className='block  text-sm font-medium text-gray-300'>
                         Firstname
                       </label>
                       {errors.firstName?.type === 'required' && (
@@ -92,7 +118,9 @@ function NewContact() {
                   </div>
                   <div className='w-full'>
                     <div className='flex items-center justify-between mb-2'>
-                      <label htmlFor='lastName' className='block  text-sm font-medium  text-gray-300'>
+                      <label
+                        htmlFor='lastName'
+                        className='block  text-sm font-medium  text-gray-300'>
                         Lastname
                       </label>
                       {errors.lastName?.type === 'required' && (
@@ -128,7 +156,9 @@ function NewContact() {
 
                   <div className='full'>
                     <div className='flex items-center justify-between mb-2'>
-                      <label htmlFor='occupation' className='block text-sm font-medium  text-gray-300'>
+                      <label
+                        htmlFor='occupation'
+                        className='block text-sm font-medium  text-gray-300'>
                         Occupation
                       </label>
                       {errors.occupation?.type === 'required' && (
@@ -146,7 +176,9 @@ function NewContact() {
 
                   <div className='full'>
                     <div className='flex items-center justify-between mb-2'>
-                      <label htmlFor='twitter' className='block  text-sm font-medium  text-gray-300'>
+                      <label
+                        htmlFor='twitter'
+                        className='block  text-sm font-medium  text-gray-300'>
                         Twitter
                       </label>
                       {errors.twitter?.type === 'required' && (
@@ -181,9 +213,9 @@ function NewContact() {
                 </div>
                 <button
                   type='submit'
-                  disabled={submitLoading}
+                  disabled={isSubmitting}
                   className='inline-flex items-center justify-center px-5 min-w-[10rem] py-2.5 mt-4 sm:mt-6 text font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-600  hover:bg-blue-800'>
-                  {submitLoading ? (
+                  {isSubmitting ? (
                     <svg
                       aria-hidden='true'
                       role='status'
@@ -204,7 +236,14 @@ function NewContact() {
                     'Submit'
                   )}
                 </button>
-              </form>
+              </form> */}
+              <FormContact
+                handleSubmit={handleSubmit}
+                onSubmit={onSubmit}
+                errors={errors}
+                isSubmitting={isSubmitting}
+                register={register}
+              />
             </div>
           </div>
         </section>

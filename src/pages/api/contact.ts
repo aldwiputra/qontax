@@ -12,9 +12,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       res.status(200).json(createRes);
     } catch (error: any) {
       console.log(error);
-      if (error.code === 'P2002') {
-        res.status(500).send({ message: 'Failed to create' });
-      }
+      // if (error.code === 'P2002') {
+      res.status(500).send({ message: 'Failed to create' });
+      // }
     }
   }
 }
