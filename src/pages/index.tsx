@@ -1,6 +1,5 @@
 import { Inter, Plus_Jakarta_Sans } from 'next/font/google';
 import { useSession } from 'next-auth/react';
-import { useEffect } from 'react';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import Layout from '@/components/Layout';
@@ -38,8 +37,6 @@ type HomeProps = {
 };
 
 export default function Home({ data }: HomeProps) {
-  const session = useSession();
-
   return (
     <>
       <Head>
@@ -49,19 +46,39 @@ export default function Home({ data }: HomeProps) {
         <section className={`${inter.className} py-8`}>
           <div className='relative max-w-screen-xl mx-auto px-8 py-6 '>
             <div className='max-w-4xl mx-auto'>
-              <div className=' text-gray-400 flex gap-3 items-center'>
-                <div className='w-8 h-8 md:w-10 md:h-10 p-2 md:p-2.5 rounded-lg border border-gray-300/10  bg-gray-800'>
-                  <svg
-                    aria-hidden='true'
-                    xmlns='http://www.w3.org/2000/svg'
-                    fill='currentColor'
-                    viewBox='0 0 20 18'>
-                    <path d='M9 1.334C7.06.594 1.646-.84.293.653a1.158 1.158 0 0 0-.293.77v13.973c0 .193.046.383.134.55.088.167.214.306.366.403a.932.932 0 0 0 .5.147c.176 0 .348-.05.5-.147 1.059-.32 6.265.851 7.5 1.65V1.334ZM19.707.653C18.353-.84 12.94.593 11 1.333V18c1.234-.799 6.436-1.968 7.5-1.65a.931.931 0 0 0 .5.147.931.931 0 0 0 .5-.148c.152-.096.279-.235.366-.403.088-.167.134-.357.134-.55V1.423a1.158 1.158 0 0 0-.293-.77Z' />
-                  </svg>
+              <div className='flex items-center justify-between'>
+                <div className=' text-gray-400 flex gap-3 items-center'>
+                  <div className='w-8 h-8 md:w-10 md:h-10 p-2 md:p-2.5 rounded-lg border border-gray-300/10  bg-gray-800'>
+                    <svg
+                      aria-hidden='true'
+                      xmlns='http://www.w3.org/2000/svg'
+                      fill='currentColor'
+                      viewBox='0 0 20 18'>
+                      <path d='M9 1.334C7.06.594 1.646-.84.293.653a1.158 1.158 0 0 0-.293.77v13.973c0 .193.046.383.134.55.088.167.214.306.366.403a.932.932 0 0 0 .5.147c.176 0 .348-.05.5-.147 1.059-.32 6.265.851 7.5 1.65V1.334ZM19.707.653C18.353-.84 12.94.593 11 1.333V18c1.234-.799 6.436-1.968 7.5-1.65a.931.931 0 0 0 .5.147.931.931 0 0 0 .5-.148c.152-.096.279-.235.366-.403.088-.167.134-.357.134-.55V1.423a1.158 1.158 0 0 0-.293-.77Z' />
+                    </svg>
+                  </div>
+                  <h1 className={`${jakarta.className} text-2xl sm:text-4xl font-bold`}>
+                    Contact List
+                  </h1>
                 </div>
-                <h1 className={`${jakarta.className} text-2xl sm:text-4xl font-bold`}>
-                  Contact List
-                </h1>
+                <Link
+                  href='/contacts/new'
+                  className='focus:outline-none leading-none text-green-700 hover:bg-green-700/20 focus:ring-2 focus:ring-green-700 font-medium rounded-lg text-sm px-4 py-2.5 '>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    fill='none'
+                    viewBox='0 0 24 24'
+                    strokeWidth={1.5}
+                    stroke='currentColor'
+                    className='inline mr-2 -mt-[3px] w-6 h-6'>
+                    <path
+                      strokeLinecap='round'
+                      strokeLinejoin='round'
+                      d='M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z'
+                    />
+                  </svg>
+                  Add Contact
+                </Link>
               </div>
               <ul className='mt-8 grid auto-fit gap-4 '>
                 {data.map((contact) => {

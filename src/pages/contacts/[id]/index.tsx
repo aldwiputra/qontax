@@ -155,7 +155,7 @@ function EditContact({ data }: ContactProps) {
                     <p className=' text-gray-500'>{data.occupation}</p>
                   </div>
                   <TwitterHandle twitter={data.twitter} middle={false} />
-                  <div>
+                  <div className='max-w-full'>
                     <h6 className='font-medium text-lg mb-1'>Bio</h6>
                     <p className='text-sm text-gray-400'>{data.bio}</p>
                   </div>
