@@ -7,9 +7,17 @@ type FormContactProps = {
   errors: FieldErrors<IFormInput>;
   register: UseFormRegister<IFormInput>;
   isSubmitting: boolean;
+  type: 'create' | 'edit';
 };
 
-function FormContact({ handleSubmit, onSubmit, errors, register, isSubmitting }: FormContactProps) {
+function FormContact({
+  handleSubmit,
+  onSubmit,
+  errors,
+  register,
+  isSubmitting,
+  type,
+}: FormContactProps) {
   return (
     <form autoComplete='off' onSubmit={handleSubmit(onSubmit)}>
       <div className='grid gap-4 sm:grid-cols-2 sm:gap-6'>
@@ -140,8 +148,10 @@ function FormContact({ handleSubmit, onSubmit, errors, register, isSubmitting }:
               className='fill-slate-200'
             />
           </svg>
-        ) : (
+        ) : type === 'create' ? (
           'Submit'
+        ) : (
+          'Save'
         )}
       </button>
     </form>

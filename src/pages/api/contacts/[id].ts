@@ -18,4 +18,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       // }
     }
   }
+
+  if (req.method === 'PUT') {
+    try {
+      const createRes = await prisma.contact.update({
+        where: {
+          id: req.query.id as string,
+        },
+        data: req.body,
+      });
+      console.log('hello from put');
+
+      res.status(200).json(createRes);
+    } catch (error: any) {
+      console.log(error);
+      // if (error.code === 'P2002') {
+      res.status(500).send({ message: 'Failed to edit' });
+      // }
+    }
+  }
 }

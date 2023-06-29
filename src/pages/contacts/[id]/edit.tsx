@@ -7,8 +7,11 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '../api/auth/[...nextauth]';
 import FormContact from '@/components/FormContact';
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import { useEffect } from 'react';
+import { prisma } from '@/libs/db';
+import { Contact } from '@prisma/client';
 
 const inter = Inter({ subsets: ['latin'] });
 const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'] });
@@ -36,24 +39,35 @@ export const getServerSideProps: GetServerSideProps = async (
     };
   }
 
+  const contact = await prisma.contact.findFirst({
+    where: {
+      id: context.params?.id as string,
+    },
+  });
+
+  console.log(contact?.imgUrl);
+
   return {
-    props: {},
+    props: {
+      data: contact,
+    },
   };
 };
 
-function NewContact() {
+function NewContact({ data }: { data: Contact }) {
   const router = useRouter();
   const session = useSession();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<IFormInput>();
 
   const onSubmit: SubmitHandler<IFormInput> = async (formData) => {
     try {
-      await axios.post(
-        '/api/contacts',
+      await axios.put(
+        `/api/contacts/${data.id}`,
         {
           ...formData,
           userId: session.data?.user.id,
@@ -70,10 +84,21 @@ function NewContact() {
     }
   };
 
+  useEffect(() => {
+    reset({
+      firstName: data.firstName,
+      lastName: data.lastName,
+      occupation: data.occupation,
+      twitter: data.twitter,
+      bio: data.bio,
+      imgUrl: data.imgUrl,
+    });
+  }, []);
+
   return (
     <>
       <Head>
-        <title>Create Contact | Qontax</title>
+        <title>Edit Contact | Qontax</title>
       </Head>
       <Layout>
         <section className={`${inter.className} py-8`}>
@@ -90,7 +115,7 @@ function NewContact() {
                   </svg>
                 </div>
                 <h1 className={`${jakarta.className} text-2xl sm:text-4xl font-bold`}>
-                  Create Contact
+                  Edit Contact
                 </h1>
               </div>
 
@@ -100,7 +125,7 @@ function NewContact() {
                 errors={errors}
                 isSubmitting={isSubmitting}
                 register={register}
-                type='create'
+                type='edit'
               />
             </div>
           </div>

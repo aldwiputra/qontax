@@ -23,7 +23,6 @@ export const getServerSideProps: GetServerSideProps = async ({
     },
   });
 
-  console.log(contact);
   return {
     props: {
       data: contact,
@@ -35,7 +34,7 @@ type ContactProps = {
   data: Contact;
 };
 
-function Contact({ data }: ContactProps) {
+function EditContact({ data }: ContactProps) {
   const [loadingSubmit, setLoadingSubmit] = useState(false);
   const session = useSession();
   const router = useRouter();
@@ -43,7 +42,7 @@ function Contact({ data }: ContactProps) {
   async function deleteContact() {
     setLoadingSubmit(false);
     try {
-      await axios.delete(`/api/contacts/${data.id}`);
+      await axios.put(`/api/contacts/${data.id}`);
 
       setLoadingSubmit(false);
       router.push('/');
@@ -92,7 +91,7 @@ function Contact({ data }: ContactProps) {
                     <div className='flex mx-auto gap-2'>
                       <Link
                         href={`/contacts/${data.id}/edit`}
-                        className='focus:ring-4 focus:outline-none font-medium rounded-md text-xs p-2 text-center inline-flex justify-center items-center text-emerald-600/75 bg-emerald-600/20 hover:bg-emerald-600/30 focus:ring-emerald-800'>
+                        className='focus:ring-2 focus:outline-none font-medium rounded-md text-xs p-2 text-center inline-flex justify-center items-center text-emerald-600/75 bg-emerald-600/20 hover:bg-emerald-600/30 focus:ring-emerald-800'>
                         <svg
                           className='w-5 h-5'
                           aria-hidden='true'
@@ -105,7 +104,7 @@ function Contact({ data }: ContactProps) {
                       </Link>
                       <button
                         onClick={deleteContact}
-                        className='focus:ring-4 focus:outline-none font-medium rounded-md text-xs p-2 text-center inline-flex justify-center items-center text-red-600/60 bg-red-600/20 hover:bg-red-600/30 focus:ring-red-900'>
+                        className='focus:ring-2 focus:outline-none font-medium rounded-md text-xs p-2 text-center inline-flex justify-center items-center text-red-600/60 bg-red-600/20 hover:bg-red-600/30 focus:ring-red-900'>
                         {loadingSubmit ? (
                           <svg
                             aria-hidden='true'
@@ -132,9 +131,9 @@ function Contact({ data }: ContactProps) {
                             viewBox='0 0 18 20'>
                             <path
                               stroke='currentColor'
-                              stroke-linecap='round'
-                              stroke-linejoin='round'
-                              stroke-width='2'
+                              strokeLinecap='round'
+                              strokeLinejoin='round'
+                              strokeWidth={1.5}
                               d='M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z'
                             />
                           </svg>
@@ -166,4 +165,4 @@ function Contact({ data }: ContactProps) {
   );
 }
 
-export default Contact;
+export default EditContact;
