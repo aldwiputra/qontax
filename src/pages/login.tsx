@@ -22,7 +22,7 @@ export const getServerSideProps: GetServerSideProps = async (
     return {
       redirect: {
         permanent: false,
-        destination: 'http://localhost:3000',
+        destination: 'https://qontax.vercel.app',
       },
     };
   }
