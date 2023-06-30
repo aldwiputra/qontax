@@ -1,6 +1,18 @@
+import { useRouter } from 'next/router';
+import React, { useState } from 'react';
+
 function SearchBar() {
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    router.push(`/?search=${searchQuery}`);
+  };
+
   return (
-    <form autoComplete='off' className='hidden sm:block'>
+    <form onSubmit={submitHandler} autoComplete='off' className='hidden sm:block'>
       <label htmlFor='default-search' className='mb-2 text-sm font-medium sr-only text-white'>
         Search
       </label>
@@ -25,7 +37,8 @@ function SearchBar() {
           id='default-search'
           className='peer  w-full py-3 px-3 pl-10 text-sm lg:min-w-[20rem] border rounded-lg  outline-none bg-gray-800/50 border-gray-700/50 placeholder-gray-500 text-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
           placeholder='Search'
-          required
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
         />
         <div className='invisible peer-focus:visible flex items-center gap-1  text-white absolute right-2 top-1/2 -translate-y-1/2  focus:ring-4 focus:outline-none font-medium rounded-md text-xs px-4 py-1.5 bg-slate-500'>
           <svg

@@ -13,7 +13,38 @@ const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'] });
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
-  const contacts = await prisma.contact.findMany();
+  const query = (context.query.search ? context.query.search : '') as string;
+
+  const contacts = await prisma.contact.findMany({
+    where: {
+      OR: [
+        {
+          firstName: {
+            contains: query,
+            mode: 'insensitive',
+          },
+        },
+        {
+          lastName: {
+            contains: query,
+            mode: 'insensitive',
+          },
+        },
+        {
+          twitter: {
+            contains: query,
+            mode: 'insensitive',
+          },
+        },
+        {
+          occupation: {
+            contains: query,
+            mode: 'insensitive',
+          },
+        },
+      ],
+    },
+  });
 
   return {
     props: {

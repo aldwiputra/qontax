@@ -29,7 +29,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
   return (
     <SessionProvider session={session}>
       {isLoading && (
-        <div className='min-h-screen backdrop-blur-sm flex justify-center items-center bg-black/70 fixed inset-0 z-20'>
+        <div className='min-h-screen backdrop-blur-[2px] flex justify-center items-center bg-black/60 fixed inset-0 z-20'>
           <Spinner />
         </div>
       )}
