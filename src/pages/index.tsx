@@ -92,6 +92,7 @@ export default function Home({ data }: HomeProps) {
                     Contact List
                   </h1>
                 </div>
+
                 <Link
                   href='/contacts/new'
                   className='inline-flex items-center focus:outline-none leading-none text-green-700 bg-green-700/10 hover:bg-green-700/20 focus:ring-2 focus:ring-green-700 font-medium rounded-lg text-sm px-4 py-2'>
@@ -111,35 +112,50 @@ export default function Home({ data }: HomeProps) {
                   Add Contact
                 </Link>
               </div>
-              <ul className='mt-8 grid auto-fit gap-4 '>
-                {data.map((contact) => {
-                  return <ContactCard key={contact.id} data={contact} />;
-                })}
-                <Link
-                  href='/contacts/new'
-                  className='rounded-lg flex items-center justify-center border-2 py-16 border-dashed border-gray-400 text-gray-400 hover:bg-gray-400/10'>
-                  <div className='flex flex-col gap-2 items-center'>
-                    <div className=' border border-gray-400 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center'>
-                      <svg
-                        className='w-4 h-4 text-gray-800 dark:text-white'
-                        aria-hidden='true'
-                        xmlns='http://www.w3.org/2000/svg'
-                        fill='none'
-                        viewBox='0 0 18 18'>
-                        <path
-                          stroke='currentColor'
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          strokeWidth='1'
-                          d='M9 1v16M1 9h16'
-                        />
-                      </svg>
-                      <span className='sr-only'>Icon description</span>
-                    </div>
-                    <span className='font-medium'>Create new contact</span>
+
+              {data.length === 0 ? (
+                <div className='flex justify-center py-24 bg-gray-900/20 rounded-lg mt-10'>
+                  <div className='text-center'>
+                    <span className='bg-rose-700/20 px-4 py-2 rounded-full text-rose-800 font-medium'>
+                      0 Result
+                    </span>
+                    <h3 className='text-3xl font-semibold text-gray-400 mt-6'>No Contacts Found</h3>
+                    <p className=' font-medium text-gray-600 mt-3'>
+                      Sorry, there is no contact to show for now.
+                    </p>
                   </div>
-                </Link>
-              </ul>
+                </div>
+              ) : (
+                <ul className='mt-8 grid auto-fit gap-4 '>
+                  {data.map((contact) => {
+                    return <ContactCard key={contact.id} data={contact} />;
+                  })}
+                  <Link
+                    href='/contacts/new'
+                    className='rounded-lg flex items-center justify-center border-2 py-16 border-dashed border-gray-400 text-gray-400 hover:bg-gray-400/10'>
+                    <div className='flex flex-col gap-2 items-center'>
+                      <div className=' border border-gray-400 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center'>
+                        <svg
+                          className='w-4 h-4 text-gray-800 dark:text-white'
+                          aria-hidden='true'
+                          xmlns='http://www.w3.org/2000/svg'
+                          fill='none'
+                          viewBox='0 0 18 18'>
+                          <path
+                            stroke='currentColor'
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
+                            strokeWidth='1'
+                            d='M9 1v16M1 9h16'
+                          />
+                        </svg>
+                        <span className='sr-only'>Icon description</span>
+                      </div>
+                      <span className='font-medium'>Create new contact</span>
+                    </div>
+                  </Link>
+                </ul>
+              )}
             </div>
           </div>
         </section>
