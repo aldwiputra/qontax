@@ -11,7 +11,9 @@ import Toast from '@/components/Toast';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const getServerSideProps: GetServerSideProps = async (context: GetServerSidePropsContext) => {
+export const getServerSideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
   const session = await getServerSession(context.req, context.res, authOptions);
 
   console.log(session);
@@ -50,7 +52,9 @@ function Login() {
         <section className={`${inter.className} py-20`}>
           <div className='flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0'>
             <div className='w-full shadow md:mt-0 sm:max-w-md xl:p-0  overflow-hidden'>
-              {router.query.error === 'OAuthAccountNotLinked' && <Toast />}
+              {router.query.error === 'OAuthAccountNotLinked' && (
+                <Toast>Email with that account has been linked. Try another</Toast>
+              )}
               <div className='p-6 space-y-2 mt-8 md:space-y-6 sm:p-8 border border-gray-800 rounded-lg'>
                 <h1 className='text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white'>
                   Sign in to your account
@@ -84,7 +88,11 @@ function Login() {
                       </g>
                       <defs>
                         <clipPath id='clip0_13183_10121'>
-                          <rect width='20' height='20' fill='white' transform='translate(0.5)'></rect>
+                          <rect
+                            width='20'
+                            height='20'
+                            fill='white'
+                            transform='translate(0.5)'></rect>
                         </clipPath>
                       </defs>
                     </svg>
@@ -115,7 +123,8 @@ function Login() {
 
                 <div className='px-8'>
                   <p className='text-center text-xs text-gray-400 leading-normal'>
-                    By signing-in, you agree to {`Qontax's`} <strong>Terms and Conditions of use</strong>
+                    By signing-in, you agree to {`Qontax's`}{' '}
+                    <strong>Terms and Conditions of use</strong>
                   </p>
                 </div>
               </div>

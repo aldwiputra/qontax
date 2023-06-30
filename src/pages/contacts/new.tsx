@@ -9,6 +9,8 @@ import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../api/auth/[...nextauth]';
 import FormContact from '@/components/FormContact';
+import Toast from '@/components/Toast';
+import { useState } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'] });
@@ -44,6 +46,7 @@ export const getServerSideProps: GetServerSideProps = async (
 function NewContact() {
   const router = useRouter();
   const session = useSession();
+  const [showError, setShowError] = useState(false);
   const {
     register,
     handleSubmit,
@@ -51,6 +54,7 @@ function NewContact() {
   } = useForm<IFormInput>();
 
   const onSubmit: SubmitHandler<IFormInput> = async (formData) => {
+    setShowError(false);
     try {
       await axios.post(
         '/api/contacts',
@@ -67,6 +71,7 @@ function NewContact() {
       router.push('/');
     } catch (error: any) {
       console.log(error);
+      setShowError(true);
     }
   };
 
@@ -93,6 +98,8 @@ function NewContact() {
                   Create Contact
                 </h1>
               </div>
+
+              {showError && <Toast>Failed to create the contact. Please try again.</Toast>}
 
               <FormContact
                 handleSubmit={handleSubmit}

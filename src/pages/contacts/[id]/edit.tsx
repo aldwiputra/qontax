@@ -9,9 +9,10 @@ import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { getServerSession } from 'next-auth';
 import FormContact from '@/components/FormContact';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { prisma } from '@/libs/db';
 import { Contact } from '@prisma/client';
+import Toast from '@/components/Toast';
 
 const inter = Inter({ subsets: ['latin'] });
 const jakarta = Plus_Jakarta_Sans({ subsets: ['latin'] });
@@ -45,8 +46,6 @@ export const getServerSideProps: GetServerSideProps = async (
     },
   });
 
-  console.log(contact?.imgUrl);
-
   return {
     props: {
       data: contact,
@@ -57,6 +56,7 @@ export const getServerSideProps: GetServerSideProps = async (
 function NewContact({ data }: { data: Contact }) {
   const router = useRouter();
   const session = useSession();
+  const [showError, setShowError] = useState(false);
   const {
     register,
     handleSubmit,
@@ -65,6 +65,7 @@ function NewContact({ data }: { data: Contact }) {
   } = useForm<IFormInput>();
 
   const onSubmit: SubmitHandler<IFormInput> = async (formData) => {
+    setShowError(false);
     try {
       await axios.put(
         `/api/contacts/${data.id}`,
@@ -81,6 +82,7 @@ function NewContact({ data }: { data: Contact }) {
       router.push('/');
     } catch (error: any) {
       console.log(error);
+      setShowError(true);
     }
   };
 
@@ -118,6 +120,8 @@ function NewContact({ data }: { data: Contact }) {
                   Edit Contact
                 </h1>
               </div>
+
+              {showError && <Toast>Failed to edit the contact. Please try again.</Toast>}
 
               <FormContact
                 handleSubmit={handleSubmit}

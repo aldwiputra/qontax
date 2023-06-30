@@ -1,8 +1,9 @@
 import { Inter } from 'next/font/google';
+import { PropsWithChildren } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
-function Toast() {
+function Toast(props: PropsWithChildren) {
   return (
     <div
       id='toast-danger'
@@ -22,9 +23,7 @@ function Toast() {
         </svg>
         <span className='sr-only'>Error icon</span>
       </div>
-      <div className='ml-3 text-sm font-normal'>
-        Account with that email has already been linked. Try with another account.
-      </div>
+      <div className='ml-3 text-sm font-normal'>{props.children}</div>
     </div>
   );
 }
