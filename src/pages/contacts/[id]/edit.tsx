@@ -30,6 +30,11 @@ export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
   const session = await getServerSession(context.req, context.res, authOptions);
+  const contact = await prisma.contact.findFirst({
+    where: {
+      id: context.params?.id as string,
+    },
+  });
 
   if (!session) {
     return {
@@ -40,11 +45,14 @@ export const getServerSideProps: GetServerSideProps = async (
     };
   }
 
-  const contact = await prisma.contact.findFirst({
-    where: {
-      id: context.params?.id as string,
-    },
-  });
+  if (session?.user.id !== contact?.userId) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/',
+      },
+    };
+  }
 
   return {
     props: {
