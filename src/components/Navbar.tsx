@@ -15,7 +15,7 @@ function Navbar() {
     <nav className={`${inter.className} border-gray-200 bg-gray-950 border-b border-b-gray-800/75`}>
       <div className='relative max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-8 py-6 '>
         <div className='flex items-center gap-4'>
-          <Link href='/' shallow={true} className='flex items-stretch'>
+          <Link href='/' className='flex items-stretch'>
             <svg
               className='w-[50px] fill-blue-700'
               viewBox='0 0 249 211'
