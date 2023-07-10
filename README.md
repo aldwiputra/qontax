@@ -39,4 +39,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Tech Stack
 
-[![My Skills](https://skillicons.dev/icons?i=ts,react,tailwind,nextjs,vercel,)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=ts,react,tailwind,nextjs,vercel,prisma)](https://skillicons.dev)
